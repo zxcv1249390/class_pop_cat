@@ -3,17 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>POPCAT CLASSIC</title>
+    <style>
+        /*容器 box 高度100vh flex排版 垂直 置中 背景顏色 #bdaa90*/
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #bdaa90;
+        }
+
+        /*標題 box 寬度80% 最大寬度 600px 上方間距 2em*/
+        .title {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 2em;
+
+        }
+
+        /*文字 box 寬度100% 最大寬度 800px 文字置中 文字白色 大小80px 邊框3px 黑色 防止文字被選取*/
+        /*自動填滿 背景圖片設定*/
+        .cat-img {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            color: white;
+            font-size: 80px;
+            -webkit-text-stroke: 3px black;
+            user-select: none;
+            flex: 1;
+            background-position: bottom;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        /*文字 div 背景圖片 用 id 設定imgs/p.png*/
+        #p {
+            background-image: url('imgs/p.png');
+        }
+
+        #op {
+            background-image: url("imgs/op.png");
+        }
+
+        /*字型 sans-serif*/
+        body {
+            margin: 0;
+            font-family : sans-serif;
+        }
+    </style>
 </head>
 <body>
 <!--新增容器去包裹標題圖片與點擊數-->
 <div class="container">
     <img class="title" src="imgs/popcat.svg" alt="POPCAT">
-    <div class="cat-img" id="click">0</div>
-    <br>
-    <img class="title" src="imgs/TDSOTM.jfif" alt="TDSOTM">
-    <div class="cat-img" id="p">I Will See You On The<br>Dark Side Of The Moon</div>
-    <button><a href = "https://music.youtube.com/playlist?list=OLAK5uy_mXoi-FuQb9Gw7Mguhdx5F4jltT0L1qOCw&si=V4mCFz1ZWObREY_6" target="_blank">TDSOTM</button>
+    <div class="cat-img" id="p">0</div>
 </div>
 
+<script>
+    // 預載圖片
+    const img = new Image();
+    // 計數初始化
+    let count = 0;
+    // 將計數器顯示到HTML用ID抓取
+    const catImg = document.getElementById('p');
+    // 顯示計數器
+    catImg.textContent = count;
+    // 計數器累加
+    function addCount() {
+        count++;
+    }
+    // 按下fuction
+    function handdown(){
+        addCount();
+        catImg.textContent = count;
+        catImg.id = 'op';
+        // 聲音
+        const audio = new Audio('pops/pop1.mp3');
+        audio.play();
+    }
+    // 滑鼠按下
+    document.addEventListener('mousedown', handdown);
+    // 滑鼠放開
+    document.addEventListener('mouseup', function(){ catImg.id = 'p';});
+    // 按下鍵盤計數
+    document.addEventListener('keydown', handdown);
+    // 鍵盤放開
+    document.addEventListener('keyup', function(){ catImg.id = 'p';});
+</script>
 </body>
 </html>
